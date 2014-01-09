@@ -1,1 +1,6 @@
-.idea/
+.idea/*
+
+# folders generated when the packaged is installed
+build/*
+dist/*
+bootstrap_dialogs.egg-info/*
