@@ -1,0 +1,67 @@
+.modal-xdialog .btn {
+    min-width: 75px;
+}
+
+.modal-xdialog .modal-dialog {
+    margin-top: 15%;
+    width: 500px;
+}
+
+.modal-xdialog.in .modal-dialog {
+    opacity: 0;
+    transform: none;
+}
+
+.modal-xdialog.fade .modal-dialog {
+    opacity: 1;
+    transform: none;
+    transition: all 0s ease-out 0s;
+}
+
+.modal-xdialog .modal-header .close {
+    margin-top: 1px;
+}
+
+.modal-xdialog .modal-content {
+    background-color: #eeeeee;
+}
+
+.modal-xdialog .modal-header {
+    background-color: #428BCA;
+    border: 1px solid #EEEEEE;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+    color: #FFFFFF;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    padding: 10px;
+}
+
+.modal-xdialog .modal-header-danger {
+    background-color: #D9534F;
+}
+
+.modal-xdialog .modal-header-warning {
+    background-color: #F0AD4E;
+}
+
+.modal-xdialog .modal-header-info {
+    background-color: #5BC0DE;
+}
+
+.modal-xdialog .modal-header-success {
+    background-color: #5CB85C;
+}
+
+.modal-xdialog .modal-header-invert {
+    background-color: #999999;
+}
+
+.modal-xdialog .modal-footer {
+    margin-top: 0;
+    border: none;
+    padding: 0 20px 15px;
+}
+
+.modal-xdialog td#col-text {
+    padding-left:10px;
+}
