@@ -178,7 +178,10 @@ var FormBox = function (url, options) {
     if (!$.isPlainObject(options.buttons))
         options.buttons = {
             'Save changes': function(sender, $modal) {
-                var $form = $modal.find('form');
+                var $form = $modal.find('form'),
+                    url = $form.attr('action'),
+                    method = $form.attr('method'),
+                    data = new FormData($form[0]);
 
                 if ($.isFunction($form.ajaxSubmit)) {
                     $form.ajaxSubmit({
@@ -216,9 +219,20 @@ var FormBox = function (url, options) {
             'Close': null
         };
 
-    ajaxGet(url, {
-        onSuccess: function(content) {
-            DialogBox(content, options)
+    $.ajax({
+        url: url,
+        success: function(response) {
+            switch (response.status) {
+                case 200:
+                    if (response.content.indexOf('<form') > -1)
+                        DialogBox(response.content, options);
+                    else
+                        alert('GET ' + url + '     ' + '\n' + 'The form tag is missing into content response. The FormBox requires a form tag.');
+                    break;
+                default:
+                    alert('GET ' + url + '  ' + response.status + ' ' + response.statusText + '\n' + response.content);
+                    break;
+            }
         }
     });
 };
