@@ -227,10 +227,16 @@ var FormBox = function (url, options) {
                     if (response.content.indexOf('<form ') > -1)
                         DialogBox(response.content, options);
                     else
-                        alert('GET ' + url + '     ' + '\n' + 'The form tag is missing into content response. The FormBox requires a form tag.');
+                        MessageBox('The form tag is missing into content response (GET ' + url + '). The FormBox requires a form tag.', {
+                            type: DIALOG_EXCLAMATION,
+                            title: 'Form Missing'
+                        });
                     break;
                 default:
-                    alert('GET ' + url + '  ' + response.status + ' ' + response.statusText + '\n' + response.content);
+                    MessageBox(response.content, {
+                        type: DIALOG_EXCLAMATION,
+                        title: response.status + ' ' + response.statusText
+                    });
                     break;
             }
         }
