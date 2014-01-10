@@ -224,7 +224,7 @@ var FormBox = function (url, options) {
         success: function(response) {
             switch (response.status) {
                 case 200:
-                    if (response.content.indexOf('<form') > -1)
+                    if (response.content.indexOf('<form ') > -1)
                         DialogBox(response.content, options);
                     else
                         alert('GET ' + url + '     ' + '\n' + 'The form tag is missing into content response. The FormBox requires a form tag.');
