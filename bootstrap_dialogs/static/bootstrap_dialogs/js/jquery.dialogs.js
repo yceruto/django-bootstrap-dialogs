@@ -167,12 +167,13 @@ MessageBox.DEFAULTS = {
  * FormBox('/login', {
  *    type: DIALOG_INFO,                                  //Default DIALOG_PRIMARY
  *    title: 'Login',                                     //Default 'Form'
- *    buttons: {'Save': function(){...}, 'Cancel': null}, //Default 'Close' and 'Save changes' buttons with ajaxSubmit (jquery.form.min.js is required)
+ *    buttons: {'Save': function(){...}, 'Cancel': null}, //Default 'Close' and 'Save changes' buttons
  *    onSaveCallback: function(){...}                     //Only when the 'buttons' option is empty
  * })
  *
  */
 var FormBox = function (url, options) {
+
     options = $.extend({}, FormBox.DEFAULTS, options);
 
     if (!$.isPlainObject(options.buttons))
@@ -183,38 +184,42 @@ var FormBox = function (url, options) {
                     method = $form.attr('method'),
                     data = new FormData($form[0]);
 
-                if ($.isFunction($form.ajaxSubmit)) {
-                    $form.ajaxSubmit({
-                        success: function (response) {
-                            switch (response.status) {
-                                case 200:
-                                    if (options.onSaveCallback && $.isFunction(options.onSaveCallback))
-                                        options.onSaveCallback($modal, response.content);
-                                    else
-                                        $modal.find('.modal-body').html(response.content);
-                                    break;
-                                case 301:
-                                case 302:
-                                    $modal.on('hidden.bs.modal', function(){
-                                        window.location.href = response.content;
-                                    });
-                                    $modal.modal('hide');
-                                    break;
-                                default:
-                                    MessageBox(response.content, {
+                $.ajax({
+                    url: url,
+                    type: method,
+                    data: data,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        switch (response.status) {
+                            case 200:
+                                if (options.onSaveCallback && $.isFunction(options.onSaveCallback))
+                                    options.onSaveCallback($modal, response.content);
+                                else if (isFormMissing(response.content))
+                                    MessageBox(method.toUpperCase() + ' ' + url + '. The form tag is missing into content response. The FormBox requires a form.', {
                                         type: DIALOG_EXCLAMATION,
-                                        title: response.status + ' ' + response.statusText
+                                        title: 'Form Missing'
                                     });
-                                    break;
-                            }
+                                else
+                                    $modal.find('.modal-body').html(response.content);
+                                break;
+                            case 301:
+                            case 302:
+                                $modal.on('hidden.bs.modal', function(){
+                                    window.location.href = response.content;
+                                });
+                                $modal.modal('hide');
+                                break;
+                            default:
+                                MessageBox(response.content, {
+                                    type: DIALOG_EXCLAMATION,
+                                    title: response.status + ' ' + response.statusText
+                                });
+                                break;
                         }
-                    });
-                } else {
-                    MessageBox('FormBox requires jquery.form.min.js', {
-                        type: DIALOG_EXCLAMATION,
-                        title: 'ajaxSubmit not found!'
-                    });
-                }
+                    }
+                })
             },
             'Close': null
         };
@@ -224,13 +229,13 @@ var FormBox = function (url, options) {
         success: function(response) {
             switch (response.status) {
                 case 200:
-                    if (response.content.indexOf('<form ') > -1)
-                        DialogBox(response.content, options);
-                    else
+                    if (isFormMissing(response.content))
                         MessageBox('The form tag is missing into content response (GET ' + url + '). The FormBox requires a form tag.', {
                             type: DIALOG_EXCLAMATION,
                             title: 'Form Missing'
                         });
+                    else
+                        DialogBox(response.content, options);
                     break;
                 default:
                     MessageBox(response.content, {
@@ -241,6 +246,10 @@ var FormBox = function (url, options) {
             }
         }
     });
+
+    function isFormMissing(content) {
+        return content.indexOf('<form ') == -1
+    }
 };
 
 FormBox.DEFAULTS = {
