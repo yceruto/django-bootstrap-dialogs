@@ -46,6 +46,9 @@ var DialogBox = function (content, options) {
             return $button;
         };
 
+    if (options.extraClass)
+        $modal.addClass(options.extraClass);
+
     if (!$.isPlainObject(options.buttons) || $.isEmptyObject(options.buttons))
         $footer.append(createButton(options.buttonOK));
     else
@@ -82,7 +85,12 @@ var DialogBox = function (content, options) {
         $modal.find('.modal-header').addClass(headerClass);
 
     $footer.find('button:first').removeClass('btn-default').addClass(buttonClass);
-    $footer.attr('style', 'text-align: ' + options.buttonAlign + ';');
+    $footer.attr('style', 'text-align: ' + options.buttonAlign);
+
+    if (options.marginTop)
+        $modal.find('.modal-dialog').prop('style').marginTop = options.marginTop;
+    if (options.overflowY)
+        $modal.prop('style').overflowY = options.overflowY;
 
     $modal.find('.modal-dialog').innerWidth(options.width);
     $modal.find('.modal-title').html(options.title);
@@ -101,6 +109,7 @@ var DialogBox = function (content, options) {
 
 DialogBox.DEFAULTS = {
     template: '<div class="modal modal-xdialog fade" id="modal-xdialog" tabindex="-1" role="dialog" aria-labelledby="modal-dialog-label" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" id="btnClose" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="modal-dialog-label"></h4></div><div class="modal-body"></div><div class="modal-footer"></div></div></div></div>',
+    extraClass: null,
     width: 500,
     title: 'Information',
     type: DIALOG_INFORMATION,
@@ -158,6 +167,7 @@ var MessageBox = function (message, options) {
 };
 
 MessageBox.DEFAULTS = {
+    extraClass: 'modal-message-box',
     iconTemplate: '<table><tr><td id="col-icon" valign="top"></td><td id="col-text"></td></tr></table>',
     iconClass: 'glyphicon-info-sign',
     iconSize: 32

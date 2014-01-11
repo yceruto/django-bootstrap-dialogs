@@ -64,3 +64,11 @@
 .modal-xdialog td#col-text {
     padding-left:10px;
 }
+
+.modal.modal-message-box {
+    overflow-y: auto;
+}
+
+.modal-message-box > .modal-dialog {
+    margin-top: 10%;
+}
