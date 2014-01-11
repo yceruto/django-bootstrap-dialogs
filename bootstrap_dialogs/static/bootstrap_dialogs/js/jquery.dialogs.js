@@ -4,7 +4,8 @@
 * Copyright (c) 2014 Yonel Ceruto Glez
 */
 
-if (typeof jQuery === "undefined") { throw new Error("Dialogs requires jQuery") }
+if (typeof jQuery === "undefined") { throw new Error("Dialogs requires jQuery") } else
+if (typeof $('body').modal === "undefined") { throw new Error("Dialogs requires Modal Bootstrap 3") }
 
 const DIALOG_INFORMATION = DIALOG_PRIMARY = 0,
       DIALOG_QUESTION = DIALOG_INFO = 1,
@@ -79,7 +80,7 @@ var DialogBox = function (content, options) {
 
     if (headerClass) 
         $modal.find('.modal-header').addClass(headerClass);
-    
+
     $footer.find('button:first').removeClass('btn-default').addClass(buttonClass);
     $footer.attr('style', 'text-align: ' + options.buttonAlign + ';');
 
