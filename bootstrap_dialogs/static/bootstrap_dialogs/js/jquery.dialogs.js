@@ -176,7 +176,7 @@ var FormBox = function (url, options) {
 
     options = $.extend({}, FormBox.DEFAULTS, options);
 
-    if (!$.isPlainObject(options.buttons))
+    if (!$.isPlainObject(options.buttons)) {
         options.buttons = {
             'Save changes': function(sender, $modal) {
                 var $form = $modal.find('form'),
@@ -196,7 +196,7 @@ var FormBox = function (url, options) {
                             case 200:
                                 if (options.onSaveCallback && $.isFunction(options.onSaveCallback))
                                     options.onSaveCallback($modal, response.content);
-                                else if (isFormMissing(response.content))
+                                else if (response.content.indexOf('<form ') == -1)
                                     MessageBox(method.toUpperCase() + ' ' + url + '. The form tag is missing into content response. The FormBox requires a form.', {
                                         type: DIALOG_EXCLAMATION,
                                         title: 'Form Missing'
@@ -223,13 +223,14 @@ var FormBox = function (url, options) {
             },
             'Close': null
         };
+    }
 
     $.ajax({
         url: url,
         success: function(response) {
             switch (response.status) {
                 case 200:
-                    if (isFormMissing(response.content))
+                    if (response.content.indexOf('<form ') == -1)
                         MessageBox('The form tag is missing into content response (GET ' + url + '). The FormBox requires a form tag.', {
                             type: DIALOG_EXCLAMATION,
                             title: 'Form Missing'
@@ -246,10 +247,6 @@ var FormBox = function (url, options) {
             }
         }
     });
-
-    function isFormMissing(content) {
-        return content.indexOf('<form ') == -1
-    }
 };
 
 FormBox.DEFAULTS = {
