@@ -4,3 +4,4 @@
 build/*
 dist/*
 bootstrap_dialogs.egg-info/*
+*.pyc
