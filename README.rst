@@ -14,17 +14,21 @@ Requirements
 Usage
 -----
 
+Include ``<script src="/bootstrap_dialogs/js/jquery.dialogs.js" type="text/javascript"></script>`` into ``base.html`` template
+
 **DialogBox**
 
-code-block:: javascript
+.. code:: html
 
-    DialogBox('buy?', {
-        type: DIALOG_QUESTION,          //Default DIALOG_INFORMATION
-        title: 'Question',              //Default 'Information'
-        buttons: {                      //Default OK button
-            'Yes': function(){
-                alert('Purchased');
-            },
-            'No': null                  //Close modal
-        }
-    })
+    <script type="text/javascript">
+        DialogBox('buy?', {
+            type: DIALOG_QUESTION,          //Default DIALOG_INFORMATION
+            title: 'Question',              //Default 'Information'
+            buttons: {                      //Default OK button
+                'Yes': function(){
+                    alert('Purchased');
+                },
+                'No': null                  //Close modal
+            }
+        });
+    </script>
