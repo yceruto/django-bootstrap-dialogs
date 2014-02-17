@@ -5,5 +5,5 @@ Creating forms and messages on less time and less code (Windows modal based on T
 
 Requirements
 ------------
-* Bootstrap 3
-* django-ajax
+* Bootstrap 3 link: https://github.com/twbs/bootstrap
+* django-ajax link: https://github.com/yceruto/django-ajax
