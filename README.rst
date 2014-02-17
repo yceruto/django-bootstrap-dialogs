@@ -10,3 +10,21 @@ Requirements
 
 .. _`Bootstrap 3`: https://github.com/twbs/bootstrap
 .. _`django-ajax`: https://github.com/yceruto/django-ajax
+
+Usage
+-----
+
+**DialogBox**
+
+code-block:: javascript
+
+    DialogBox('buy?', {
+        type: DIALOG_QUESTION,          //Default DIALOG_INFORMATION
+        title: 'Question',              //Default 'Information'
+        buttons: {                      //Default OK button
+            'Yes': function(){
+                alert('Purchased');
+            },
+            'No': null                  //Close modal
+        }
+    })
