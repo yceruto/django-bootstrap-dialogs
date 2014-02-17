@@ -1,5 +1,5 @@
-from setuptools import setup, find_packages
 import os
+from setuptools import setup, find_packages
 
 CLASSIFIERS = [
     'Environment :: Web Environment',
@@ -32,7 +32,7 @@ setup(
     platforms=['OS Independent'],
     classifiers=CLASSIFIERS,
     install_requires=[
-        'setuptools',
+        'setuptools'
     ],
     packages=find_packages(),
     include_package_data=True,
