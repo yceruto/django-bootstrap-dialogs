@@ -32,5 +32,8 @@ Include ``<script src="/bootstrap_dialogs/js/jquery.dialogs.js" type="text/javas
             }
         });
     </script>
+    
+Result:
 
-![DialogBox](https://raw.github.com/yceruto/bootstrap-dialogs/master/docs/_screenshot/dialog-box.png)
+.. image:: https://raw.github.com/yceruto/bootstrap-dialogs/master/docs/_screenshot/dialog-box.png
+   :alt: DialogBox Screenshot
