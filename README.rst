@@ -32,3 +32,5 @@ Include ``<script src="/bootstrap_dialogs/js/jquery.dialogs.js" type="text/javas
             }
         });
     </script>
+
+<img src="docs/_screenshot/dialog-box.png" />
