@@ -175,12 +175,12 @@ MessageBox.DEFAULTS = {
 
 /**
  * @example
- * FormBox('<form>...</form>', {                           //If content is null then load content from url parameter
+ * FormBox('<form>...</form>', {                          //If content is null then load content from url parameter
  *    type: DIALOG_INFO,                                  //Default DIALOG_PRIMARY
  *    title: 'Login',                                     //Default 'Form'
  *    url: null,                                          //Default null
- *    buttons: {'Save': function(){...}, 'Cancel': null}, //Default 'Close' and 'Save changes' buttons
- *    onSaveCallback: function(){...}                     //Only when the 'buttons' option is empty
+ *    buttons: {'Save': function(sender, $modal){...}},   //Default 'Close' and 'Save changes' buttons
+ *    onSave: function(content, $modal){...}              //Only when the 'buttons' option is empty
  * })
  *
  */
@@ -201,8 +201,7 @@ var FormBox = function (content, options) {
                     method = $form.attr('method'),
                     data = new FormData($form[0]);
 
-                $.ajax({
-                    url: url,
+                $.ajax(url, {
                     type: method,
                     data: data,
                     cache: false,
@@ -211,8 +210,8 @@ var FormBox = function (content, options) {
                     success: function (response) {
                         switch (response.status) {
                             case 200:
-                                if (options.onSaveCallback && $.isFunction(options.onSaveCallback))
-                                    options.onSaveCallback($modal, response.content);
+                                if (options.onSave && $.isFunction(options.onSave))
+                                    options.onSave(response.content, $modal);
                                 else if (response.content.indexOf('<form ') == -1)
                                     MessageBox(method.toUpperCase() + ' ' + url + '. The form tag is missing into content response. The FormBox requires a form.', {
                                         type: DIALOG_EXCLAMATION,
@@ -245,8 +244,7 @@ var FormBox = function (content, options) {
     if (content) {
         DialogBox(content, options);
     } else {
-        $.ajax({
-            url: options.url,
+        $.ajax(options.url, {
             success: function(response) {
                 switch (response.status) {
                     case 200:
@@ -276,5 +274,5 @@ FormBox.DEFAULTS = {
     buttonTemplate: '<button type="button" class="btn btn-default"></button>',
     url: null,
     buttonAlign: 'right',
-    onSaveCallback: null
+    onSave: null
 };
