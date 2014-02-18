@@ -70,14 +70,14 @@ Result:
 
     <script type="text/javascript">
         MessageBox('buy?', {
-            type: DIALOG_QUESTION,          //Default DIALOG_INFORMATION
-            title: 'Question',              //Default 'Information'
-            icon: 'glyphicon-shopping-cart',//Default 'glyphicon-info-sign'
-            buttons: {                      //Default OK button
+            type: DIALOG_QUESTION,            //Default DIALOG_INFORMATION
+            title: 'Question',                //Default 'Information'
+            icon: 'glyphicon-shopping-cart',  //Default 'glyphicon-info-sign'
+            buttons: {                        //Default OK button
                 'Yes': function(){
                     alert('Purchased');
                 },
-                'No': null                  //Close modal
+                'No': null                    //Close modal
             }
         });
     </script>
@@ -92,17 +92,17 @@ Result:
 .. code:: html
 
     <script type="text/javascript">
-        FormBox('<form>...</form>', {       //If content is null then load content from url parameter
-            type: DIALOG_PRIMARY,         //Default DIALOG_PRIMARY
-            title: 'Login',                 //Default 'Form'
-            url: null,                      //Default null
-            buttons: {                      //Defaults 'Close' and 'Save changes' buttons
+        FormBox('<form>...</form>', {           //If content is null then load content from url parameter
+            type: DIALOG_PRIMARY,               //Default DIALOG_PRIMARY
+            title: 'Login',                     //Default 'Form'
+            url: null,                          //Default null
+            buttons: {                          //Defaults 'Close' and 'Save changes' buttons
                 'Login': function(sender, $modal){
                     do_something();
                 },
-                'Close': null              //Close window
+                'Close': null                   //Close window
             },
-            onSave: function(content, $modal){ //Only when the 'buttons' option is empty
+            onSave: function(content, $modal){  //Only when the 'buttons' option is empty
                 do_something();
             }
         });
