@@ -63,3 +63,53 @@ Result:
 
 .. image:: https://raw.github.com/yceruto/bootstrap-dialogs/master/docs/_screenshot/dialog-box.png
    :alt: DialogBox Screenshot
+
+**MessageBox**
+
+.. code:: html
+
+    <script type="text/javascript">
+        MessageBox('buy?', {
+            type: DIALOG_QUESTION,          //Default DIALOG_INFORMATION
+            title: 'Question',              //Default 'Information'
+            icon: 'glyphicon-shopping-cart',//Default 'glyphicon-info-sign'
+            buttons: {                      //Default OK button
+                'Yes': function(){
+                    alert('Purchased');
+                },
+                'No': null                  //Close modal
+            }
+        });
+    </script>
+
+Result:
+
+.. image:: https://raw.github.com/yceruto/bootstrap-dialogs/master/docs/_screenshot/dialog-box.png
+   :alt: DialogBox Screenshot
+
+**FormBox**
+
+.. code:: html
+
+    <script type="text/javascript">
+        FormBox('<form>...</form>', {       //If content is null then load content from url parameter
+            type: DIALOG_INFO,              //Default DIALOG_PRIMARY
+            title: 'Login',                 //Default 'Form'
+            url: null,                      //Default null
+            buttons: {                      //Defaults 'Close' and 'Save changes' buttons
+                'Save': function(sender, $modal){
+                    do_something();
+                },
+                'Cancel': null              //Close window
+            },
+            onSave: function(content, $modal){ //Only when the 'buttons' option is empty
+                do_something();
+            }
+        });
+    </script>
+
+Result:
+
+.. image:: https://raw.github.com/yceruto/bootstrap-dialogs/master/docs/_screenshot/dialog-box.png
+   :alt: DialogBox Screenshot
+
