@@ -84,7 +84,7 @@ Result:
 
 Result:
 
-.. image:: https://raw.github.com/yceruto/bootstrap-dialogs/master/docs/_screenshot/dialog-box.png
+.. image:: https://raw.github.com/yceruto/bootstrap-dialogs/master/docs/_screenshot/message-box.png
    :alt: DialogBox Screenshot
 
 **FormBox**
@@ -110,6 +110,6 @@ Result:
 
 Result:
 
-.. image:: https://raw.github.com/yceruto/bootstrap-dialogs/master/docs/_screenshot/dialog-box.png
+.. image:: https://raw.github.com/yceruto/bootstrap-dialogs/master/docs/_screenshot/form-box.png
    :alt: DialogBox Screenshot
 
