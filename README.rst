@@ -93,7 +93,7 @@ Result:
 
     <script type="text/javascript">
         FormBox('<form>...</form>', {       //If content is null then load content from url parameter
-            type: DIALOG_IMPORTANT,         //Default DIALOG_PRIMARY
+            type: DIALOG_PRIMARY,         //Default DIALOG_PRIMARY
             title: 'Login',                 //Default 'Form'
             url: null,                      //Default null
             buttons: {                      //Defaults 'Close' and 'Save changes' buttons
