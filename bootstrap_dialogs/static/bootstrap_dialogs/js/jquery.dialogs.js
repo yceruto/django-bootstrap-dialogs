@@ -184,6 +184,11 @@ MessageBox.DEFAULTS = {
  *
  */
 var FormBox = function (url, options) {
+    // If url is an object, simulate pre-1.5 signature
+    if ( typeof url === "object" ) {
+        options = url;
+        url = undefined;
+    }
 
     options = $.extend({}, FormBox.DEFAULTS, options);
 
@@ -236,34 +241,39 @@ var FormBox = function (url, options) {
         };
     }
 
-    $.ajax({
-        url: url,
-        success: function(response) {
-            switch (response.status) {
-                case 200:
-                    if (response.content.indexOf('<form ') == -1)
-                        MessageBox('The form tag is missing into content response (GET ' + url + '). The FormBox requires a form tag.', {
+    if (url) {
+        $.ajax({
+            url: url,
+            success: function(response) {
+                switch (response.status) {
+                    case 200:
+                        if (response.content.indexOf('<form ') == -1)
+                            MessageBox('The form tag is missing into content response (GET ' + url + '). The FormBox requires a form tag.', {
+                                type: DIALOG_EXCLAMATION,
+                                title: 'Form Missing'
+                            });
+                        else
+                            DialogBox(response.content, options);
+                        break;
+                    default:
+                        MessageBox(response.content, {
                             type: DIALOG_EXCLAMATION,
-                            title: 'Form Missing'
+                            title: response.status + ' ' + response.statusText
                         });
-                    else
-                        DialogBox(response.content, options);
-                    break;
-                default:
-                    MessageBox(response.content, {
-                        type: DIALOG_EXCLAMATION,
-                        title: response.status + ' ' + response.statusText
-                    });
-                    break;
+                        break;
+                }
             }
-        }
-    });
+        });
+    } else {
+        DialogBox(options.content, options);
+    }
 };
 
 FormBox.DEFAULTS = {
     title: 'Form',
     width: 600,
     buttonTemplate: '<button type="button" class="btn btn-default"></button>',
+    content: null,
     buttonAlign: 'right',
     onSaveCallback: null
 };
