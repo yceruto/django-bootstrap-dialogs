@@ -36,7 +36,7 @@ or simply with:
 Usage
 -----
 
-Use the jquery.ajax.min.js as static file into ``base.html`` template
+Use the ``jquery.dialogs.js`` as static file into ``base.html`` template
 
 .. code:: html
 
