@@ -1,5 +1,5 @@
-bootstrap-dialogs
-=================
+django-bootstrap-dialogs
+========================
 
 Javascript library for create forms and messages on less time and less code (Windows modal based on Twitter Bootstrap 3).
 
@@ -11,10 +11,36 @@ Requirements
 .. _`Bootstrap 3`: https://github.com/twbs/bootstrap
 .. _`django-ajax`: https://github.com/yceruto/django-ajax
 
+Install
+-------
+
+Install django-bootstrap-dialogs in your python environment
+
+1- Download and install package:
+
+.. code:: sh
+
+    $ pip install django-bootstrap-dialogs
+
+or simply with:
+
+.. code:: sh
+
+    $ python setup.py install
+
+2- Add ``'bootstrap_dialogs'`` into the ``INSTALLED_APPS`` list.
+
+3- Read usage section and enjoy its advantages!
+
+
 Usage
 -----
 
-Include ``<script src="/bootstrap_dialogs/js/jquery.dialogs.js" type="text/javascript"></script>`` into ``base.html`` template
+Use the jquery.ajax.min.js as static file into ``base.html`` template
+
+.. code:: html
+
+    <script type="text/javascript" src="{% static 'bootstrap_dialogs/js/jquery.dialogs.js' %}"></script>
 
 **DialogBox**
 
